@@ -1,9 +1,9 @@
 {
-  "name": "discord-html-transcripts",
+  "name": "@johnbotapp/discord-html-transcripts",
   "version": "3.2.0",
   "description": "A nicely formatted html transcript generator for discord.js.",
   "main": "dist/index.js",
-  "homepage": "https://github.com/ItzDerock/discord-html-transcripts",
+  "homepage": "https://github.com/johnbotapp/discord-html-transcripts",
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ItzDerock/discord-html-transcripts.git"
+    "url": "git+https://github.com/johnbotapp/discord-html-transcripts.git"
   },
   "keywords": [
     "discord.js",
@@ -59,5 +59,12 @@
   },
   "peerDependencies": {
     "discord.js": "^14.0.0 || ^15.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/johnbotapp/discord-html-transcripts/issues"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
   }
 }
