@@ -112,10 +112,10 @@ export default async function renderMessages({ messages, channel, callbacks, ...
       {/* header */}
       <section>
         <span style={{ fontSize: '28px', color: "#fff", fontWeight: 600 }}>
-          {channel.isDMBased() ? 'Welcome to' : `${channel.guild?.translate ? await channel.guild.translate("tickets/attachments:WELCOME_TO") : "Welcome to"} #${channel.name.startsWith("closed-") ? channel.name.slice(7) : channel.name} !`}
+          {channel.isDMBased() ? 'Welcome to' : `${channel.guild?.translate?.("tickets/attachments:WELCOME_TO") ?? "Welcome to"} #${channel.name.startsWith("closed-") ? channel.name.slice(7) : channel.name} !`}
         </span>
         <span style={{ fontSize: '16px', color: "#b9bbbe", fontWeight: 400 }}>
-          {channel.isDMBased() ? 'This is the start of the' : `${channel.guild?.translate ? await channel.guild.translate("tickets/attachments:CHANNEL_START") : "This is the start of the"} #${channel.name.startsWith("closed-") ? channel.name.slice(7) : channel.name}.`}
+          {channel.isDMBased() ? 'This is the start of the' : `${channel.guild?.translate?.("tickets/attachments:CHANNEL_START") ?? "This is the start of the"} #${channel.name.startsWith("closed-") ? channel.name.slice(7) : channel.name}.`}
         </span>
       </section>
       <header>
@@ -125,7 +125,7 @@ export default async function renderMessages({ messages, channel, callbacks, ...
         {channel.isDMBased() ? 'Direct Messages' : `${channel.name.startsWith("closed-") ? channel.name.slice(7) : channel.name}`}
         {/*<div className='divider'></div>
         <span style={{ fontSize: '16px', color: "#b9bbbe", fontWeight: 400 }}>
-          {messages.length} {channel.isDMBased() ? messages.length > 1 ? 'messages' : 'message' : `${channel.guild?.translate ? messages.length > 1 ? (await channel.guild.translate("words:MESSAGE_2")).toLowerCase() : (await channel.guild.translate("words:MESSAGE_1")).toLowerCase() : `message${messages.length > 1 ? 's' : ''}`}`}
+          {messages.length} {channel.isDMBased() ? messages.length > 1 ? 'messages' : 'message' : `${channel.guild?.translate ? messages.length > 1 ? (channel.guild.translate("words:MESSAGE_2")).toLowerCase() : (channel.guild.translate("words:MESSAGE_1")).toLowerCase() : `message${messages.length > 1 ? 's' : ''}`}`}
         </span>*/}
       </header>
     </div>
@@ -133,7 +133,7 @@ export default async function renderMessages({ messages, channel, callbacks, ...
 
   const footerElement = (
     <footer>
-      {channel.isDMBased() ? 'This archive has been generated on the' : `${channel.guild?.translate ? await channel.guild.translate("tickets/attachments:ARCHIVE_GENERATE") : "This archive has been generated on the"}`}
+      {channel.isDMBased() ? 'This archive has been generated on the' : `${channel.guild?.translate?.("tickets/attachments:ARCHIVE_GENERATE") ?? "This archive has been generated on the"}`}
       {' '}
       <time id="footer-timestamp" data-timestamp={Math.floor(new Date().getTime() / 1000)} data-local="fr-FR"></time>
     </footer>
@@ -142,7 +142,7 @@ export default async function renderMessages({ messages, channel, callbacks, ...
   const contextMenu = (
     <div id="context-menu" className="context-menu">
       <div className="item">
-        {channel.isDMBased() ? 'Copy Message ID' : `${channel.guild?.translate ? await channel.guild.translate("tickets/attachments:COPY_MESSAGE_ID") : "Copy Message ID"}`}
+        {channel.isDMBased() ? 'Copy Message ID' : `${channel.guild?.translate?.("tickets/attachments:COPY_MESSAGE_ID") ?? "Copy Message ID"}`}
       </div>
     </div>
   )

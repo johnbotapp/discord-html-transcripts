@@ -89,8 +89,8 @@ export default async function renderMessage(message: Message, context: RenderMes
           name={message.thread.name}
           cta={
             message.thread.messageCount
-              ? `${message.thread.messageCount} ${(message.guild && message.guild?.translate) ? message.thread.messageCount > 1 ? await message.guild.translate("words:MESSAGE_2") : await message.guild.translate("words:MESSAGE_1") : `Message${message.thread.messageCount > 1 ? 's' : ''}`}`
-              : (message.guild && message.guild?.translate) ? await message.guild.translate("tickets/attachments:SEE_THREAD") : 'View Thread'
+              ? `${message.thread.messageCount} ${message.thread.messageCount > 1 ? await message.guild?.translate?.("tickets/words:MESSAGE_2") : await message.guild?.translate?.("tickets/words:MESSAGE_1") ?? `Message${message.thread.messageCount > 1 ? 's' : ''}` }`
+              : `${message.guild?.translate?.("tickets/attachments:SEE_THREAD") ?? 'View Thread'}`
           }
         >
           {message.thread.lastMessage ? (
@@ -103,7 +103,7 @@ export default async function renderMessage(message: Message, context: RenderMes
               )}
             </DiscordThreadMessage>
           ) : (
-            `${(message.guild && message.guild?.translate) ? await message.guild.translate("tickets/attachments:MESSAGES_NOT_SAVED") : 'Thread messages not saved.'}`
+            `${message.guild?.translate?.("tickets/attachments:MESSAGES_NOT_SAVED") ?? 'Thread messages not saved.'}`
           )}
         </DiscordThread>
       )}

@@ -9,7 +9,7 @@ export default async function renderSystemMessage(message: Message) {
     case MessageType.UserJoin:
       return (
         <DiscordSystemMessage id={`m-${message.id}`} key={message.id} type="join">
-          {await JoinMessage(message.member, message.author)}
+          {JoinMessage(message.member, message.author)}
         </DiscordSystemMessage>
       );
 
@@ -19,10 +19,10 @@ export default async function renderSystemMessage(message: Message) {
           <Highlight color={message.member?.roles.color?.hexColor}>
             {message.author.displayName ?? message.author.username}
           </Highlight> {
-            (message.guild && message.guild?.translate) ? await message.guild.translate("tickets/attachments:PINNED") : "pinned"
+            `${message.guild?.translate?.("tickets/attachments:PINNED") ?? "pinned"}`
           } {' '}
-          <i data-goto={message.reference?.messageId}>{ message.guild ? await message.guild.translate("tickets/attachments:A_MESSAGE") : "a message" }</i> {' '} {
-            (message.guild && message.guild?.translate) ? await message.guild.translate("tickets/attachments:IN_THIS_CHANNEL") : "to this channel"
+          <i data-goto={message.reference?.messageId}>{ `${message.guild?.translate?.("tickets/attachments:A_MESSAGE") ?? "a message"}` }</i> {' '} {
+            `${message.guild?.translate?.("tickets/attachments:IN_THIS_CHANNEL") ?? "to this channel"}`
           }.
           {/* reactions */}
           {message.reactions.cache.size > 0 && (
@@ -49,7 +49,7 @@ export default async function renderSystemMessage(message: Message) {
           <Highlight color={message.member?.roles.color?.hexColor}>
             {message.author.displayName ?? message.author.username}
           </Highlight> {
-            (message.guild && message.guild?.translate) ? await message.guild.translate("tickets/attachments:BOOSTED_SERVEUR") : "boosted the server!"
+            `${message.guild?.translate?.("tickets/attachments:BOOSTED_SERVEUR") ?? "boosted the server!"}`
           }
         </DiscordSystemMessage>
       );
@@ -60,7 +60,7 @@ export default async function renderSystemMessage(message: Message) {
           <Highlight color={message.member?.roles.color?.hexColor}>
             {message.author.displayName ?? message.author.username}
           </Highlight> {
-            (message.guild && message.guild?.translate) ? await message.guild.translate("tickets/attachments:STARTED_THREAD") : "started a thread:"
+            `${message.guild?.translate?.("tickets/attachments:STARTED_THREAD") ?? "started a thread:"}`
           } <i data-goto={message.reference?.messageId}>{message.content}</i>
         </DiscordSystemMessage>
       );
@@ -74,23 +74,23 @@ export function Highlight({ children, color }: { children: React.ReactNode; colo
   return <i style={{ color: color ?? 'white' }}>{children}</i>;
 }
 
-export async function JoinMessage(member: GuildMember | null, fallbackUser: User) {
+export function JoinMessage(member: GuildMember | null, fallbackUser: User) {
   const allJoinMessages = [
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_0") : "{{user}} has arrived.",
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_1") : "A wild {{user}} appears.",
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_2") : "{{user}} just arrived!",
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_3") : "{{user}} has joined the group.",
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_4") : "Welcome, {{user}}. Say hi!",
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_5") : "{{user}} just slipped into the server.",
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_6") : "Everyone, welcome {{user}} as it should be!",
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_7") : "Hooray, you did it, {{user}}!",
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_8") : "Welcome, {{user}}. Hope you brought some pizza",
-    (member && member.guild?.translate) ? await member.guild.translate("tickets/attachments:DISCORD_JOIN_MESSAGE_9") : "{{user}} has bounced into the server."
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_0") ?? "{{user}} has arrived.",
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_1") ?? "A wild {{user}} appears.",
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_2") ?? "{{user}} just arrived!",
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_3") ?? "{{user}} has joined the group.",
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_4") ?? "Welcome, {{user}}. Say hi!",
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_5") ?? "{{user}} just slipped into the server.",
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_6") ?? "Everyone, welcome {{user}} as it should be!",
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_7") ?? "Hooray, you did it, {{user}}!",
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_8") ?? "Welcome, {{user}}. Hope you brought some pizza",
+    member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_9") ?? "{{user}} has bounced into the server."
   ];
 
   const randomMessage = allJoinMessages[Math.floor(Math.random() * allJoinMessages.length)];
 
-  return randomMessage
+  return (randomMessage as string)
     .split('{{user}}')
     .flatMap((item, i) => [
       item,

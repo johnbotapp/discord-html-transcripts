@@ -11,7 +11,7 @@ export default async function renderReply(message: Message, context: RenderMessa
   const referencedMessage = context.messages.find((m) => m.id === message.reference!.messageId);
 
   if (!referencedMessage) return <DiscordReply slot="reply">
-    { (message.guild && message.guild?.translate) ? await message.guild.translate("tickets/attachments:MESSAGE_NOT_BE_LOADED") : "Message could not be loaded."}
+    { `${message.guild?.translate?.("tickets/attachments:MESSAGE_NOT_BE_LOADED") ?? "Message could not be loaded."}` }
   </DiscordReply>;
 
   const isCrosspost = referencedMessage.reference && referencedMessage.reference.guildId !== message.guild?.id;
@@ -39,11 +39,11 @@ export default async function renderReply(message: Message, context: RenderMessa
         </span>
       ) : isCommand ? (
         <em data-goto={referencedMessage.id}>
-          { (message.guild && message.guild?.translate) ? await message.guild.translate("tickets/attachments:SEE_COMMAND") : "Click to see command."}
+          { `${message.guild?.translate?.("tickets/attachments:SEE_COMMAND") ?? "Click to see command."}` }
         </em>
       ) : (
         <em data-goto={referencedMessage.id}>
-          { (message.guild && message.guild?.translate) ? await message.guild.translate("tickets/attachments:SEE_ATTACHMENTS") : "Click to see attachment."}
+          { `${message.guild?.translate?.("tickets/attachments:SEE_ATTACHMENTS") ?? "Click to see attachment."}` }
         </em>
       )}
     </DiscordReply>
