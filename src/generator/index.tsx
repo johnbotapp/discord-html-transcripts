@@ -60,7 +60,7 @@ export default async function renderMessages({ messages, channel, callbacks, ...
   ).filter(isDefined);
 
   const elements = (
-    <DiscordMessages style={{ padding: '0 0 89px', backgroundColor: "#313338", border: "none", borderTop: "1px solid rgba(255, 255, 255, 0.05)" }}>
+    <DiscordMessages style={{ padding: '0 0 90px', backgroundColor: "#313338", border: "none", borderTop: "1px solid rgba(255, 255, 255, 0.05)" }}>
       {/* header <DiscordHeader
         guild={channel.isDMBased() ? 'Direct Messages' : channel.guild.name}
         channel={
