@@ -36,6 +36,7 @@ export type RenderMessageContext = {
     resolveRole: (roleId: string) => Awaitable<Role | null>;
   };
 
+  locale?: string;
   poweredBy?: boolean;
   footerText?: string;
   saveImages: boolean;
@@ -135,7 +136,7 @@ export default async function renderMessages({ messages, channel, callbacks, ...
     <footer>
       {channel.isDMBased() ? 'This archive has been generated on the' : `${channel.guild?.translate?.("tickets/attachments:ARCHIVE_GENERATE") ?? "This archive has been generated on the"}`}
       {' '}
-      <time id="footer-timestamp" data-timestamp={Math.floor(new Date().getTime() / 1000)} data-local="fr-FR"></time>
+      <time id="footer-timestamp" data-timestamp={Math.floor(new Date().getTime() / 1000)} data-local={options.locale ?? 'en-US'}></time>
     </footer>
   )
 

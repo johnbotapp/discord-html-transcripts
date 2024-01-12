@@ -40,6 +40,12 @@ export type GenerateFromMessagesOptions<T extends ExportReturnType> = Partial<{
   filename: string;
 
   /**
+   * The locale to use when formatting dates
+   * @default 'en-US'
+   */
+  locale: string;
+
+  /**
    * Whether to include the "Powered by discord-html-transcripts" footer
    * @default true
    */

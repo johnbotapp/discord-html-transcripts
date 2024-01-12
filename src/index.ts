@@ -47,6 +47,7 @@ export async function generateFromMessages<T extends ExportReturnType = ExportRe
 
       ...(options.callbacks ?? {}),
     },
+    locale: options.locale ?? 'en-US',
     poweredBy: options.poweredBy ?? true,
     footerText: options.footerText ?? 'Exported {number} message{s}.',
     favicon: options.favicon ?? 'guild',
