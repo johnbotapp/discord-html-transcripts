@@ -1,6 +1,6 @@
 {
   "name": "@johnbotapp/discord-html-transcripts",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "A nicely formatted html transcript generator for discord.js.",
   "main": "dist/index.js",
   "homepage": "https://github.com/johnbotapp/discord-html-transcripts",
