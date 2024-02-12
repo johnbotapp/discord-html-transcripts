@@ -3,13 +3,13 @@ import { MessageType, type GuildMember, type Message, type User } from 'discord.
 import React from 'react';
 import { parseDiscordEmoji } from '../../utils/utils';
 
-export default async function renderSystemMessage(message: Message) {
+export default async function SystemMessage({ message }: { message: Message }) {
   switch (message.type) {
     case MessageType.RecipientAdd:
     case MessageType.UserJoin:
       return (
         <DiscordSystemMessage id={`m-${message.id}`} key={message.id} type="join">
-          {JoinMessage(message.member, message.author)}
+          <JoinMessage member={message.member} fallbackUser={message.author} />
         </DiscordSystemMessage>
       );
 
@@ -18,12 +18,10 @@ export default async function renderSystemMessage(message: Message) {
         <DiscordSystemMessage id={`m-${message.id}`} key={message.id} type="pin">
           <Highlight color={message.member?.roles.color?.hexColor}>
             {message.author.displayName ?? message.author.username}
-          </Highlight> {
-            `${message.guild?.translate?.("tickets/attachments:PINNED") ?? "pinned"}`
-          } {' '}
-          <i data-goto={message.reference?.messageId}>{ `${message.guild?.translate?.("tickets/attachments:A_MESSAGE") ?? "a message"}` }</i> {' '} {
-            `${message.guild?.translate?.("tickets/attachments:IN_THIS_CHANNEL") ?? "to this channel"}`
-          }.
+          </Highlight>{' '}
+          { `${message.guild?.translate?.("tickets/attachments:PINNED") ?? "pinned"}` }
+          <i data-goto={message.reference?.messageId}>{ `${message.guild?.translate?.("tickets/attachments:A_MESSAGE") ?? "a message"}` }</i>
+          { `${message.guild?.translate?.("tickets/attachments:IN_THIS_CHANNEL") ?? "to this channel"}` }.
           {/* reactions */}
           {message.reactions.cache.size > 0 && (
             <DiscordReactions slot="reactions">
@@ -48,9 +46,8 @@ export default async function renderSystemMessage(message: Message) {
         <DiscordSystemMessage id={`m-${message.id}`} key={message.id} type="boost">
           <Highlight color={message.member?.roles.color?.hexColor}>
             {message.author.displayName ?? message.author.username}
-          </Highlight> {
-            `${message.guild?.translate?.("tickets/attachments:BOOSTED_SERVEUR") ?? "boosted the server!"}`
-          }
+          </Highlight>{' '}
+          { `${message.guild?.translate?.("tickets/attachments:BOOSTED_SERVEUR") ?? "boosted the server!"}` }
         </DiscordSystemMessage>
       );
 
@@ -59,9 +56,8 @@ export default async function renderSystemMessage(message: Message) {
         <DiscordSystemMessage id={`ms-${message.id}`} key={message.id} type="thread">
           <Highlight color={message.member?.roles.color?.hexColor}>
             {message.author.displayName ?? message.author.username}
-          </Highlight> {
-            `${message.guild?.translate?.("tickets/attachments:STARTED_THREAD") ?? "started a thread:"}`
-          } <i data-goto={message.reference?.messageId}>{message.content}</i>
+          </Highlight>{' '}
+          { `${message.guild?.translate?.("tickets/attachments:STARTED_THREAD") ?? "started a thread:"}` } <i data-goto={message.reference?.messageId}>{message.content}</i>
         </DiscordSystemMessage>
       );
 
@@ -74,7 +70,7 @@ export function Highlight({ children, color }: { children: React.ReactNode; colo
   return <i style={{ color: color ?? 'white' }}>{children}</i>;
 }
 
-export function JoinMessage(member: GuildMember | null, fallbackUser: User) {
+export function JoinMessage({ member, fallbackUser }: { member: GuildMember | null; fallbackUser: User }) {
   const allJoinMessages = [
     member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_0") ?? "{{user}} has arrived.",
     member?.guild?.translate?.("tickets/attachments:DISCORD_JOIN_MESSAGE_1") ?? "A wild {{user}} appears.",
