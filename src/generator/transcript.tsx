@@ -1,8 +1,8 @@
-import { DiscordHeader, DiscordMessages as DiscordMessagesComponent } from '@derockdev/discord-components-react';
-import { ChannelType } from 'discord.js';
+import { /*DiscordHeader,*/ DiscordMessages as DiscordMessagesComponent } from '@derockdev/discord-components-react';
+//import { ChannelType } from 'discord.js';
 import React, { Suspense } from 'react';
 import type { RenderMessageContext } from '.';
-import MessageContent, { RenderType } from './renderers/content';
+//import MessageContent, { RenderType } from './renderers/content';
 import DiscordMessage from './renderers/message';
 
 /**
@@ -14,9 +14,8 @@ import DiscordMessage from './renderers/message';
  */
 export default async function DiscordMessages({ messages, channel, callbacks, ...options }: RenderMessageContext) {
   return (
-    <DiscordMessagesComponent style={{ minHeight: '100vh' }}>
-      {/* header */}
-      <DiscordHeader
+    <DiscordMessagesComponent style={{ minHeight: '100vh', padding: '0 0 90px', backgroundColor: "#313338", border: "none", borderTop: "1px solid rgba(255, 255, 255, 0.05)" }}>
+      {/* <DiscordHeader
         guild={channel.isDMBased() ? 'Direct Messages' : channel.guild.name}
         channel={
           channel.isDMBased()
@@ -43,7 +42,7 @@ export default async function DiscordMessages({ messages, channel, callbacks, ..
         ) : (
           `This is the start of #${channel.name} channel.`
         )}
-      </DiscordHeader>
+      </DiscordHeader> */}
 
       {/* body */}
       <Suspense>
@@ -52,8 +51,7 @@ export default async function DiscordMessages({ messages, channel, callbacks, ..
         ))}
       </Suspense>
 
-      {/* footer */}
-      <div style={{ textAlign: 'center', width: '100%' }}>
+      {/* <div style={{ textAlign: 'center', width: '100%' }}>
         {options.footerText
           ? options.footerText
               .replaceAll('{number}', messages.length.toString())
@@ -68,7 +66,7 @@ export default async function DiscordMessages({ messages, channel, callbacks, ..
             .
           </span>
         ) : null}
-      </div>
+      </div> */}
     </DiscordMessagesComponent>
   );
 }

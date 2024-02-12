@@ -10,9 +10,7 @@ export default async function MessageReply({ message, context }: { message: Mess
 
   const referencedMessage = context.messages.find((m) => m.id === message.reference!.messageId);
 
-  if (!referencedMessage) return <DiscordReply slot="reply">
-    { `${message.guild?.translate?.("tickets/attachments:MESSAGE_NOT_BE_LOADED") ?? "Message could not be loaded."}` }
-  </DiscordReply>;
+  if (!referencedMessage) return <DiscordReply slot="reply">{ `${message.guild?.translate?.("tickets/attachments:MESSAGE_NOT_BE_LOADED") ?? "Message could not be loaded."}` }</DiscordReply>;
 
   const isCrosspost = referencedMessage.reference && referencedMessage.reference.guildId !== message.guild?.id;
   const isCommand = referencedMessage.interaction !== null;
