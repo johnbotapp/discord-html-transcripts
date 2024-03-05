@@ -97,7 +97,7 @@ export default async function DiscordMessage({
           name={message.thread.name}
           cta={
             message.thread.messageCount
-              ? `${message.thread.messageCount} ${message.thread.messageCount > 1 ? await message.guild?.translate?.("tickets/words:MESSAGE_2") : await message.guild?.translate?.("tickets/words:MESSAGE_1") ?? `Message${message.thread.messageCount > 1 ? 's' : ''}` }`
+              ? `${message.thread.messageCount} ${message.thread.messageCount > 1 ? message.guild?.translate?.("tickets/words:MESSAGE_2") : message.guild?.translate?.("tickets/words:MESSAGE_1") ?? `Message${message.thread.messageCount > 1 ? 's' : ''}` }`
               : `${message.guild?.translate?.("tickets/attachments:SEE_THREAD") ?? 'View Thread'}`
           }
         >
