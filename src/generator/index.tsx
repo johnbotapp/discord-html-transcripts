@@ -8,6 +8,7 @@ import path from 'path';
 import { renderToString } from '@derockdev/discord-components-core/hydrate';
 import { streamToString } from '../utils/utils';
 import DiscordMessages from './transcript';
+import type { ResolveImageCallback } from '../downloader/images';
 
 declare module 'discord.js' {
   interface Guild {
@@ -30,6 +31,7 @@ export type RenderMessageContext = {
   channel: Channel;
 
   callbacks: {
+    resolveImageSrc: ResolveImageCallback;
     resolveChannel: (channelId: string) => Awaitable<Channel | null>;
     resolveUser: (userId: string) => Awaitable<User | null>;
     resolveRole: (roleId: string) => Awaitable<Role | null>;

@@ -1,6 +1,6 @@
 import { /*DiscordHeader,*/ DiscordMessages as DiscordMessagesComponent } from '@derockdev/discord-components-react';
 //import { ChannelType } from 'discord.js';
-import React, { Suspense } from 'react';
+import React from 'react';
 import type { RenderMessageContext } from '.';
 //import MessageContent, { RenderType } from './renderers/content';
 import DiscordMessage from './renderers/message';
@@ -45,11 +45,9 @@ export default async function DiscordMessages({ messages, channel, callbacks, ..
       </DiscordHeader> */}
 
       {/* body */}
-      <Suspense>
-        {messages.map((message) => (
-          <DiscordMessage message={message} context={{ messages, channel, callbacks, ...options }} key={message.id} />
-        ))}
-      </Suspense>
+      {messages.map((message) => (
+        <DiscordMessage message={message} context={{ messages, channel, callbacks, ...options }} key={message.id} />
+      ))}
 
       {/* <div style={{ textAlign: 'center', width: '100%' }}>
         {options.footerText
