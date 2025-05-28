@@ -124,6 +124,10 @@ export async function createTranscript<T extends ExportReturnType = ExportReturn
 
     // fetch messages
     const messages = await channel.messages.fetch(fetchLimitOptions);
+
+    // if there are no messages, break
+    if (messages.size === 0) break;
+
     const filteredMessages = typeof filter === 'function' ? messages.filter(filter) : messages;
 
     // add the messages to the array
@@ -138,7 +142,7 @@ export async function createTranscript<T extends ExportReturnType = ExportReturn
     if (allMessages.length >= resolvedLimit) break;
   }
 
-  if (resolvedLimit < allMessages.length) allMessages = allMessages.slice(0, limit);
+  if (resolvedLimit < allMessages.length) allMessages = allMessages.slice(0, resolvedLimit);
 
   // generate the transcript
   return generateFromMessages<T>(allMessages.reverse(), channel, options);
