@@ -43,12 +43,14 @@ export type RenderMessageContext = {
   saveImages: boolean;
   favicon: 'guild' | string;
   hydrate: boolean;
+  channelName?: string | null;
 };
 
 export default async function render({ messages, channel, callbacks, ...options }: RenderMessageContext) {
   const profiles = buildProfiles(messages);
 
   if (!channel.isDMBased() && channel.name.startsWith("closed-")) channel.name = channel.name.slice(7);
+  if (!channel.isDMBased() && options.channelName) channel.name = options.channelName;
 
   // NOTE: this renders a STATIC site with no interactivity
   // if interactivity is needed, switch to renderToPipeableStream and use hydrateRoot on client.

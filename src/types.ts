@@ -70,6 +70,12 @@ export type GenerateFromMessagesOptions<T extends ExportReturnType> = Partial<{
    * @default false - the returned html will be hydrated client-side
    */
   hydrate: boolean;
+
+  /**
+   * The name of the channel to use in the transcript
+   * @default null - uses the channel's name
+   */
+  channelName: string | null;
 }>;
 
 export type CreateTranscriptOptions<T extends ExportReturnType> = Partial<
