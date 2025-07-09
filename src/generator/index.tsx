@@ -2,7 +2,7 @@ import { type Awaitable, type Channel, type Message, type Role, type User } from
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import { buildProfiles } from '../utils/buildProfiles';
-import { revealSpoiler, scrollToMessage, copyMessageId } from '../static/client';
+import { revealSpoiler, scrollToMessage, contextMenu } from '../static/client';
 import { readFileSync } from 'fs';
 import path from 'path';
 import { renderToString } from '@derockdev/discord-components-core/hydrate';
@@ -139,14 +139,17 @@ export default async function render({ messages, channel, callbacks, ...options 
 
         {/* context menu */}
         <div id="context-menu" className="context-menu">
-          <div className="item">
+          <div className="item message">
             {channel.isDMBased() ? 'Copy Message ID' : `${channel.guild?.translate?.("tickets/attachments:COPY_MESSAGE_ID") ?? "Copy Message ID"}`}
+          </div>
+          <div className="item user">
+            {channel.isDMBased() ? 'Copy User ID' : `${channel.guild?.translate?.("tickets/attachments:COPY_USER_ID") ?? "Copy User ID"}`}
           </div>
         </div>
       </body>
 
       {/* Make sure the script runs after the DOM has loaded */}
-      {options.hydrate && <script dangerouslySetInnerHTML={{ __html: revealSpoiler }}></script> || <script dangerouslySetInnerHTML={{ __html: copyMessageId }}></script>}
+      {options.hydrate && <script dangerouslySetInnerHTML={{ __html: revealSpoiler }}></script> || <script dangerouslySetInnerHTML={{ __html: contextMenu }}></script>}
     </html>
   );
 
