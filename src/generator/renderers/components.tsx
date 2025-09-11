@@ -19,7 +19,8 @@ const ButtonStyleMapping = {
   [ButtonStyle.Success]: 'success',
   [ButtonStyle.Danger]: 'destructive',
   [ButtonStyle.Link]: 'secondary',
-} as const;
+  [ButtonStyle.Premium]: 'primary',
+} satisfies Record<ButtonStyle, Parameters<typeof DiscordButton>[0]['type']>;
 
 export function Component({ component, id }: { component: MessageActionRowComponent; id: number }) {
   if (component.type === ComponentType.Button) {
