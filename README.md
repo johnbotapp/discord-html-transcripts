@@ -29,12 +29,12 @@ This module can format the following:
 
 **This module is designed to work with [discord.js](https://discord.js.org/#/) v14/v15 _only_. If you need v13 support, roll back to v2.X.X**
 
-Styles from [@derockdev/discord-components](https://github.com/ItzDerock/discord-components).  
+Styles from [@derockdev/discord-components](https://github.com/ItzDerock/discord-components).
 Behind the scenes, this package uses React SSR to generate a static site.
 
 ## 👋 Support
 
-Please do not DM me requesting support with this package, I will not respond.  
+Please do not DM me requesting support with this package, I will not respond.
 Instead, please open a thread on [this](https://discord.gg/MZQN8QMJg8) server.
 
 ## 🖨️ Example Output
@@ -78,7 +78,7 @@ channel.send({
 
 ## ⚙️ Configuration
 
-Both methods of generating a transcript allow for an option object as the last parameter.  
+Both methods of generating a transcript allow for an option object as the last parameter.
 **All configuration options are optional!**
 
 ### Built in Message Fetcher
@@ -94,7 +94,11 @@ const attachment = await discordTranscripts.createTranscript(channel, {
       // register custom callbacks for the following:
       resolveChannel: (channelId: string) => Awaitable<Channel | null>,
       resolveUser: (userId: string) => Awaitable<User | null>,
-      resolveRole: (roleId: string) => Awaitable<Role | null>
+      resolveRole: (roleId: string) => Awaitable<Role | null>,
+      resolveImageSrc: (
+        attachment: APIAttachment,
+        message: APIMessage
+      ) => Awaitable<string | null | undefined>
     },
     poweredBy: true, // Whether to include the "Powered by discord-html-transcripts" footer
     hydrate: true, // Whether to hydrate the html server-side
@@ -109,6 +113,21 @@ const attachment = await discordTranscripts.generateFromMessages(messages, chann
   // Same as createTranscript, except no limit or filter
 });
 ```
+
+### Compressing images
+
+If `saveImages` is set to `true`, all images will be downloaded and stored in the file _as-is_. You can optionally enable compression by installing the `sharp` module and setting the following options:
+
+```js
+callbacks: {
+  resolveImageSrc: new TranscriptImageDownloader()
+    .withMaxSize(5120) // 5MB in KB
+    .withCompression(40, true) // 40% quality, convert to webp
+    .build(),
+},
+```
+
+Note that, in a more advanced setup, you could store a copy of the files and return an entirely new URL pointing to your own image hosting site by implementing a custom `resolveImageSrc` function.
 
 ## 🤝 Enjoy the package?
 
