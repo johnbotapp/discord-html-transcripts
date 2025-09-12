@@ -7,7 +7,7 @@ import {
   DiscordThread,
   DiscordThreadMessage,
 } from '@derockdev/discord-components-react';
-import { ComponentType, type Message as MessageType } from 'discord.js';
+import { type Message as MessageType } from 'discord.js';
 import React from 'react';
 import type { RenderMessageContext } from '..';
 import { parseDiscordEmoji } from '../../utils/utils';
@@ -70,12 +70,9 @@ export default async function DiscordMessage({
       {/* components */}
       {message.components.length > 0 && (
         <DiscordAttachments slot="components">
-          {message.components
-            // TODO: support other component types
-            .filter((x) => x.type === ComponentType.ActionRow)
-            .map((component, id) => (
-              <ComponentRow key={id} id={id} row={component} />
-            ))}
+          {message.components.map((component, id) => (
+            <ComponentRow key={id} id={id} component={component} context={context} />
+          ))}
         </DiscordAttachments>
       )}
 
