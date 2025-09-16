@@ -4,6 +4,7 @@ import React from 'react';
 import type { RenderMessageContext } from '.';
 //import MessageContent, { RenderType } from './renderers/content';
 import DiscordMessage from './renderers/message';
+import { globalStyles } from './renderers/components/styles';
 
 /**
  * The core transcript component.
@@ -20,11 +21,11 @@ export default async function DiscordMessages({ messages, channel, callbacks, ..
         channel={
           channel.isDMBased()
             ? channel.type === ChannelType.DM
-              ? channel.recipient?.tag ?? 'Unknown Recipient'
+              ? (channel.recipient?.tag ?? 'Unknown Recipient')
               : 'Unknown Recipient'
             : channel.name
         }
-        icon={channel.isDMBased() ? undefined : channel.guild.iconURL({ size: 128 }) ?? undefined}
+        icon={channel.isDMBased() ? undefined : (channel.guild.iconURL({ size: 128 }) ?? undefined)}
       >
         {channel.isThread() ? (
           `Thread channel in ${channel.parent?.name ?? 'Unknown Channel'}`

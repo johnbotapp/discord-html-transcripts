@@ -1,14 +1,14 @@
 import { type Awaitable, type Channel, type Message, type Role, type User } from 'discord.js';
-import ReactDOMServer from 'react-dom/server';
+import { prerenderToNodeStream } from 'react-dom/static';
 import React from 'react';
 import { buildProfiles } from '../utils/buildProfiles';
 import { revealSpoiler, scrollToMessage, contextMenu } from '../static/client';
 import { readFileSync } from 'fs';
 import path from 'path';
 import { renderToString } from '@derockdev/discord-components-core/hydrate';
-import { streamToString } from '../utils/utils';
 import DiscordMessages from './transcript';
 import type { ResolveImageCallback } from '../downloader/images';
+import { streamToString } from '../utils/utils';
 
 declare module 'discord.js' {
   interface Guild {
@@ -54,7 +54,7 @@ export default async function render({ messages, channel, callbacks, ...options 
 
   // NOTE: this renders a STATIC site with no interactivity
   // if interactivity is needed, switch to renderToPipeableStream and use hydrateRoot on client.
-  const stream = ReactDOMServer.renderToStaticNodeStream(
+  const { prelude } = await prerenderToNodeStream(
     <html>
       <head>
         <meta charSet="utf-8" />
@@ -153,7 +153,7 @@ export default async function render({ messages, channel, callbacks, ...options 
     </html>
   );
 
-  const markup = await streamToString(stream);
+  const markup = await streamToString(prelude);
 
   if (options.hydrate) {
     const result = await renderToString(markup, {
