@@ -60,6 +60,17 @@ export default async function render({ messages, channel, callbacks, ...options 
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        {/* styles */}
+        <link
+          rel="stylesheet"
+          href={`https://cdn.johnbot.app/css/transcripts.css`}
+        />
+
+        {/* scripts */}
+        <script
+          src='https://cdn.johnbot.app/js/transcripts.js'
+        ></script>
+
         {/* favicon */}
         <link
           rel="icon"
@@ -79,15 +90,6 @@ export default async function render({ messages, channel, callbacks, ...options 
 
         {!options.hydrate && (
           <>
-            {/* styles */}
-            <link
-              rel="stylesheet"
-              href={`https://cdn.johnbot.app/css/transcripts.css`}
-            />
-            {/* scripts */}
-            <script
-              src='https://cdn.johnbot.app/js/transcripts.js'
-            ></script>
             {/* profiles */}
             <script
               dangerouslySetInnerHTML={{

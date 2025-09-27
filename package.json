@@ -1,6 +1,6 @@
 {
   "name": "@johnbotapp/discord-html-transcripts",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "A nicely formatted html transcript generator for discord.js.",
   "main": "dist/index.js",
   "homepage": "https://github.com/johnbotapp/discord-html-transcripts",
@@ -38,8 +38,8 @@
     "@eslint/js": "^9.35.0",
     "@types/debug": "^4.1.12",
     "@types/node": "^24.3.1",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.9",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.1",
     "@typescript-eslint/eslint-plugin": "^8.43.0",
     "@typescript-eslint/parser": "^8.43.0",
     "debug": "^4.4.1",

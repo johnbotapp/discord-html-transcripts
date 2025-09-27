@@ -15,7 +15,7 @@ import { globalStyles } from './renderers/components/styles';
  */
 export default async function DiscordMessages({ messages, channel, callbacks, ...options }: RenderMessageContext) {
   return (
-    <DiscordMessagesComponent style={{ minHeight: '100vh', padding: '0 0 90px', backgroundColor: "#313338", border: "none", borderTop: "1px solid rgba(255, 255, 255, 0.05)" }}>
+    <DiscordMessagesComponent style={{ backgroundColor: "#313338", border: "none", borderTop: "1px solid rgba(255, 255, 255, 0.05)" }}>
       <style dangerouslySetInnerHTML={{ __html: globalStyles }} />
       {/* <DiscordHeader
         guild={channel.isDMBased() ? 'Direct Messages' : channel.guild.name}
