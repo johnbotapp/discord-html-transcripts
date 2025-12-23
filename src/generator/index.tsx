@@ -115,10 +115,10 @@ export default async function render({ messages, channel, callbacks, ...options 
         <div>
           <section>
             <span style={{ fontSize: '28px', color: "#fff", fontWeight: 600 }}>
-              {channel.isDMBased() ? 'Welcome to' : `${channel.guild?.translate?.("tickets/attachments:WELCOME_TO") ?? "Welcome to"} #${channel.name} !`}
+              {channel.isDMBased() ? 'Welcome to Direct Messages !' : `${channel.guild?.translate?.("tickets/attachments:WELCOME_TO", { channelName: channel.name }) ?? `Welcome to #${channel.name} !`}`}
             </span>
             <span style={{ fontSize: '16px', color: "#b9bbbe", fontWeight: 400 }}>
-              {channel.isDMBased() ? 'This is the start of the' : `${channel.guild?.translate?.("tickets/attachments:CHANNEL_START") ?? "This is the start of the"} #${channel.name} ${channel.guild?.translate?.("words:CHANNEL_MIN") ?? "channel"}.`}
+              {channel.isDMBased() ? 'This is the start of the Direct Messages channel.' : `${channel.guild?.translate?.("tickets/attachments:CHANNEL_START", { channelName: channel.name }) ?? `This is the start of the #${channel.name} channel.`}`}
             </span>
           </section>
           <header>
